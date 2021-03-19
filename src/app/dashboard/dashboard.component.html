@@ -1,0 +1,65 @@
+<div class="wrapper">
+    <div class="b1-title3">Hi, {{(currentUser | async).userName}}</div>
+    <div class="filter b1-mt-5">
+        <div class="row b1-align-center h-100">
+            <div class="filter-input col-md-4">
+                <input placeholder="search">
+                <div class="filter-filters">
+                    <div class="filter-filters_item">Status</div>
+                    <div class="filter-filters_item">Country</div>
+                    <div class="filter-filters_item">PS number</div>
+                    <div class="filter-filters_item">MAWB number</div>
+                    <div class="filter-filters_item">Date</div>
+                </div>
+            </div>
+            <div class="col-md-8 text-right filter-tracker">
+                <div class="b1-large">
+                    Cargo Tracking
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+    <div class="b1-title3 b1-mt-5 b1-mb-5">
+        Declaration
+    </div>
+    <div class="declarations">
+        <div class="declarations-item b1-mb-4" *ngFor="let declaration of declarationList">
+            <div class="row">
+                <div class="col-md-2">
+                    <div class="b1-flex b1-justify-center b1-flex-direction h-100">
+                        <div class="b1-medium">{{declaration.conveyanceReference}}</div>
+                        <div class="b1-base b1-opacity-60">{{declaration.documentReference}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="b1-flex b1-justify-center b1-flex-direction h-100">
+                        <div class="b1-medium">{{declaration.consignorCountry.name}}</div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="b1-flex  b1-justify-between b1-flex-direction h-100">
+                        <span class="destination b1-mt-5" [class]="declaration.statusCode.toLowerCase()">
+
+                        </span>
+                        <div class="b1-base b1-opacity-60 text-center b1-mt-5">{{declaration.declarationDate |
+                            date:'dd.MM.yyyy, HH.mm'}}</div>
+                    </div>
+
+                </div>
+                <div class="col-md-2">
+                    <div class="b1-flex b1-justify-center b1-flex-direction h-100 text-right">
+                        <div class="b1-medium">{{declaration.consigneeCountry.name}}</div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="b1-flex b1-justify-center b1-flex-direction h-100 text-right">
+                        <div class="b1-medium">{{declaration.statusCode}}</div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>

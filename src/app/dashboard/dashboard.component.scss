@@ -1,0 +1,94 @@
+@import "../../assets/scss/typography";
+.declarations {
+    &-item {
+        padding: 32px;
+        background: #ffffff;
+        border-radius: 10px;
+    }
+}
+
+.destination {
+    width: 100%;
+    display: block;
+    height: 4px;
+    background-color: #d7d7d7;
+    position: relative;
+    &::before {
+        position: absolute;
+        content: "";
+        display: block;
+        border-radius: 50%;
+        height: 16px;
+        width: 16px;
+        background-color: #ffffff;
+        border: 4px solid #ba366f;
+        left: -8px;
+        top: -6px;
+    }
+    &::after {
+        position: absolute;
+        content: "";
+        display: block;
+        border-radius: 50%;
+        height: 16px;
+        width: 16px;
+        background-color: #ffffff;
+        border: 4px solid #d7d7d7;
+        right: -8px;
+        top: -6px;
+    }
+    &.accepted {
+        background-color: #ba366f;
+        &::after {
+            border-color: #ba366f;
+        }
+    }
+}
+
+.filter {
+    background: url("../../assets/images/filter-background.png"), linear-gradient(90deg, #1d4dec 0%, #8023ff 100%);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    border-radius: 10px;
+    height: 150px;
+    width: 100%;
+    padding: 32px;
+    &-input {
+        & input {
+            background: rgba(225, 222, 222, 0.3);
+            border-radius: 10px;
+            @include small;
+            color: rgba(255, 255, 255, 0.6);
+            width: 500px;
+            height: 48px;
+            outline: none;
+            border: none;
+            padding-left: 40px;
+            &::placeholder {
+                color: rgba(255, 255, 255, 0.6);
+            }
+        }
+    }
+    &-filters {
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        margin-top: 16px;
+        &_item {
+            @include base;
+            color: rgb(255, 255, 255);
+            opacity: 0.6;
+            margin-right: 32px;
+            transition: all 150ms ease-in-out;
+            cursor: pointer;
+            &:hover{
+                opacity: 1;
+            }
+        }
+    }
+    &-tracker {
+        color: #ffffff;
+    }
+}
