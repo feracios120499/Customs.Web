@@ -12,6 +12,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CabinetComponent } from './cabinet/cabinet.component';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { LocaleService, NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
 
 @NgModule({
   declarations: [
@@ -22,18 +25,22 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     BrowserModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot(),
+    ToastrModule.forRoot(),
+    NgxDaterangepickerMd.forRoot(),
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    NgbModule
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptor,
       multi: true,
-    }],
+    },
+    LocaleService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

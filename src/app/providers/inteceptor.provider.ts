@@ -13,7 +13,7 @@ import { TokenResponse } from '../models/TokenResponse';
 export class AuthInterceptor implements HttpInterceptor {
 
 
-  endpoint: string = 'http://localhost:49165/api/v1/';
+  endpoint: string = 'https://uacustoms.unity-bars.com/api/v1/';
   tokenEndpoint: string = '/Bars.API.Admin.Site/';
   host: string = '';
 

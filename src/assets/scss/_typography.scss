@@ -131,7 +131,7 @@ $font-display-line-height: 1;
 }
 
 @mixin bold {
-  font-weight: 600;
+  font-weight: 600 !important;
 }
 $font-family: "Lato", sans-serif;
 
@@ -171,7 +171,9 @@ $font-family: "Lato", sans-serif;
   &-small {
     @include small;
   }
-
+  &-bold{
+    @include bold;
+  }
   &-micro {
     @include micro;
   }

@@ -7,8 +7,12 @@ export interface DeclarationHeader {
     id: string;
     conveyanceReference: string;
     documentReference: string;
-    consignorCountry: Country;
-    consigneeCountry: Country;
+    consigneeCountryCode: string;
+    consigneeCountryName : string;
+    consignorCountryCode : string;
+    consignorCountryName : string;
     declarationDate: Date;
     statusCode: string;
+    createDate: Date;
+    customsId: string;
 }

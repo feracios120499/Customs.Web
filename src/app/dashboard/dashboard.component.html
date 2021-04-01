@@ -1,31 +1,58 @@
 <div class="wrapper">
-    <div class="b1-title3">Hi, {{(currentUser | async).userName}}</div>
+    <div class="b1-flex b1-justify-between">
+        <div class="b1-title3">Hi, {{(currentUser | async).userName}}</div>
+        <div class="logout" (click)="logOut()">
+            Logout
+            <img src="../../assets/images/icon-log-out.png" alt="" class="b1-ml-2">
+        </div>
+    </div>
+    
     <div class="filter b1-mt-5">
         <div class="row b1-align-center h-100">
             <div class="filter-input col-md-4">
-                <input placeholder="search">
-                <div class="filter-filters">
-                    <div class="filter-filters_item">Status</div>
-                    <div class="filter-filters_item">Country</div>
-                    <div class="filter-filters_item">PS number</div>
-                    <div class="filter-filters_item">MAWB number</div>
-                    <div class="filter-filters_item">Date</div>
-                </div>
+                <input placeholder="search" [(ngModel)]="search">
             </div>
             <div class="col-md-8 text-right filter-tracker">
                 <div class="b1-large">
-                    Cargo Tracking
+                    Customs Status Check
                 </div>
             </div>
         </div>
-        
+
     </div>
 
-    <div class="b1-title3 b1-mt-5 b1-mb-5">
-        Declaration
+    <div class="b1-flex b1-justify-between b1-mt-5 b1-mb-5">
+        <div class="b1-title3">
+            Declaration
+        </div>
+        <div class="header-right">
+            <div class="b1-flex b1-base">
+                <div class="b1-opacity-60">Sort</div>
+                <div ngbDropdown class="b1-ml-4 b1-base b1-bold b1-dropdown" #myDrop="ngbDropdown">
+                    <a class="b1-a b1-base b1-bold pointer" (click)="myDrop.open()">{{currentSort.translate}}</a>
+                    <div ngbDropdownMenu>
+                        <button ngbDropdownItem class="b1-base b1-bold" *ngFor="let sort of sortList"
+                            (click)="setSort(sort)" [class.active]="sort == currentSort">{{sort.translate}}</button>
+                        <!-- <button ngbDropdownItem class="b1-base b1-bold active">Last added</button>
+                        <button ngbDropdownItem class="b1-base b1-bold">Country</button>
+                        <button ngbDropdownItem class="b1-base b1-bold">MAWB</button>
+                        <button ngbDropdownItem class="b1-base b1-bold">Flight number</button> -->
+                    </div>
+                </div>
+            </div>
+            <div class="b1-daterangepicker">
+                <label for="date" class="b1-opacity-60 b1-base">Date</label>
+                <input type="text" ngxDaterangepickerMd [(ngModel)]="selected" [ranges]="ranges"
+                    class="b1-base b1-bold b1-ml-4" [minDate]="minDate" [maxDate]="maxDate" name="date"
+                    (datesUpdated)="datesUpdated($event)" [showCustomRangeLabel]="true"
+                    [locale]="{applyLabel: 'Apply', format: 'DD MMM,YYYY'}" readonly />
+            </div>
+
+        </div>
     </div>
+
     <div class="declarations">
-        <div class="declarations-item b1-mb-4" *ngFor="let declaration of declarationList">
+        <div class="declarations-item b1-mb-4" *ngFor="let declaration of declarationList | deepFilter : search:['id']" (click)="openDetail(declaration)">
             <div class="row">
                 <div class="col-md-2">
                     <div class="b1-flex b1-justify-center b1-flex-direction h-100">
@@ -35,7 +62,7 @@
                 </div>
                 <div class="col-md-2">
                     <div class="b1-flex b1-justify-center b1-flex-direction h-100">
-                        <div class="b1-medium">{{declaration.consignorCountry.name}}</div>
+                        <div class="b1-medium">{{declaration.consignorCountryName}}</div>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -43,23 +70,41 @@
                         <span class="destination b1-mt-5" [class]="declaration.statusCode.toLowerCase()">
 
                         </span>
-                        <div class="b1-base b1-opacity-60 text-center b1-mt-5">{{declaration.declarationDate |
-                            date:'dd.MM.yyyy, HH.mm'}}</div>
+                        <div class="b1-flex b1-justify-between">
+                            <div class="b1-base b1-opacity-60 text-center b1-mt-5">{{declaration.declarationDate |
+                                date:'dd.MM.yyyy, HH.mm'}}</div>
+                            <div class="b1-base b1-opacity-60 text-center b1-mt-5">{{declaration.createDate |
+                                date:'dd.MM.yyyy, HH.mm'}}</div>
+                        </div>
+
                     </div>
 
                 </div>
                 <div class="col-md-2">
                     <div class="b1-flex b1-justify-center b1-flex-direction h-100 text-right">
-                        <div class="b1-medium">{{declaration.consigneeCountry.name}}</div>
+                        <div class="b1-medium">{{declaration.consigneeCountryName}}</div>
                     </div>
                 </div>
                 <div class="col-md-2">
+                    <div *ngIf="declaration.customsId" class="b1-medium b1-opacity-80">{{declaration.customsId}}</div>
                     <div class="b1-flex b1-justify-center b1-flex-direction h-100 text-right">
-                        <div class="b1-medium">{{declaration.statusCode}}</div>
+                        <div class="b1-medium declarations-item_status text-center" [class]="declaration.statusCode.toLowerCase()">{{declaration.statusCode}}</div>
                     </div>
                 </div>
             </div>
 
         </div>
     </div>
+    <div class="b1-flex b1-justify-flex-end b1-align-center">
+        Т18 Customs Control for CHAMP TGC
+        <img src="../../assets/images/logo.png" class="b1-ml-4">
+    </div>
+    
 </div>
+<ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="white" type="square-jelly-box" [fullScreen]="true">
+    <p style="color: white">
+        Loading... </p>
+</ngx-spinner>
+<ng-template #content let-modal>
+    hello
+</ng-template>

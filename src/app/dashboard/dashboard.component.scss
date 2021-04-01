@@ -4,6 +4,21 @@
         padding: 32px;
         background: #ffffff;
         border-radius: 10px;
+        transition: all 150ms ease-in-out;
+        cursor: pointer;
+        &:hover{
+            background-color: rgba(186, 54, 111, 0.1);
+        }
+        &_status {
+            background: rgba(186, 54, 111, 0.1);
+            border-radius: 10px;
+            text-transform: lowercase;
+            padding: 8px;
+            &.reject {
+                background: rgba(10, 10, 10, 0.1);
+                border-radius: 10px;
+            }
+        }
     }
 }
 
@@ -83,12 +98,45 @@
             margin-right: 32px;
             transition: all 150ms ease-in-out;
             cursor: pointer;
-            &:hover{
+            &:hover {
                 opacity: 1;
             }
         }
     }
     &-tracker {
         color: #ffffff;
+    }
+}
+.header {
+    &-right {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        width: 50%;
+    }
+}
+
+.b1-daterangepicker {
+    & input {
+        outline: none;
+        border: none;
+        background: transparent;
+        width: 250px;
+    }
+}
+
+.logout {
+    width: 120px;
+    height: 42px;
+
+    border: 1px solid #ba366f;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ba366f;
+    cursor: pointer;
+    &:hover{
+        background-color: rgba(186, 54, 111, 0.1);
     }
 }

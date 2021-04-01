@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
@@ -11,7 +12,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private authService: AuthService, private router: Router, private spinner: NgxSpinnerService) { }
+  constructor(private authService: AuthService, private router: Router, private spinner: NgxSpinnerService, private toastr: ToastrService) { }
 
   public email: string;
   public password: string;
@@ -29,10 +30,10 @@ export class LoginComponent implements OnInit {
 
   public logIn() {
     this.authService.loginByEmail(this.email, this.password).subscribe((response) => {
-      //this.router.navigateByUrl('/dashboard');
+      this.router.navigateByUrl('/dashboard');
     }
       , (error) => {
-        console.log(error);
+        this.toastr.error(error.error.Message || error, "Error");
       }
     )
 
