@@ -6,7 +6,7 @@
             <img src="../../assets/images/icon-log-out.png" alt="" class="b1-ml-2">
         </div>
     </div>
-    
+
     <div class="filter b1-mt-5">
         <div class="row b1-align-center h-100">
             <div class="filter-input col-md-4">
@@ -23,7 +23,7 @@
 
     <div class="b1-flex b1-justify-between b1-mt-5 b1-mb-5">
         <div class="b1-title3">
-            Declaration
+            CUSTOMS MRN DETAILS
         </div>
         <div class="header-right">
             <div class="b1-flex b1-base">
@@ -52,17 +52,19 @@
     </div>
 
     <div class="declarations">
-        <div class="declarations-item b1-mb-4" *ngFor="let declaration of declarationList | deepFilter : search:['id']" (click)="openDetail(declaration)">
+        <div class="declarations-item b1-mb-4" *ngFor="let declaration of declarationList | deepFilter : search:['id']"
+            (click)="openDetail(declaration)">
             <div class="row">
                 <div class="col-md-2">
-                    <div class="b1-flex b1-justify-center b1-flex-direction h-100">
-                        <div class="b1-medium">{{declaration.conveyanceReference}}</div>
-                        <div class="b1-base b1-opacity-60">{{declaration.documentReference}}</div>
+                    <div class="b1-flex h-100 b1-align-center">
+                        <div class="b1-medium b1-bold">{{declaration.documentReference}}</div>
+                        <div class="b1-medium b1-ml-4">{{declaration.conveyanceReference}}</div>
+
                     </div>
                 </div>
                 <div class="col-md-2">
-                    <div class="b1-flex b1-justify-center b1-flex-direction h-100">
-                        <div class="b1-medium">{{declaration.consignorCountryName}}</div>
+                    <div class="b1-flex b1-justify-center b1-flex-direction h-100 text-center">
+                        <div class="b1-medium">{{declaration.consignorCountryCode}}</div>
                     </div>
                 </div>
                 <div class="col-md-4">
@@ -72,23 +74,24 @@
                         </span>
                         <div class="b1-flex b1-justify-between">
                             <div class="b1-base b1-opacity-60 text-center b1-mt-5">{{declaration.declarationDate |
-                                date:'dd.MM.yyyy, HH.mm'}}</div>
+                                date:'dd.MM.yyyy, HH:mm'}}</div>
                             <div class="b1-base b1-opacity-60 text-center b1-mt-5">{{declaration.createDate |
-                                date:'dd.MM.yyyy, HH.mm'}}</div>
+                                date:'dd.MM.yyyy, HH:mm'}}</div>
                         </div>
 
                     </div>
 
                 </div>
                 <div class="col-md-2">
-                    <div class="b1-flex b1-justify-center b1-flex-direction h-100 text-right">
-                        <div class="b1-medium">{{declaration.consigneeCountryName}}</div>
+                    <div class="b1-flex b1-justify-center b1-flex-direction h-100 text-center">
+                        <div class="b1-medium">{{declaration.consigneeCountryCode}}</div>
                     </div>
                 </div>
                 <div class="col-md-2">
                     <div *ngIf="declaration.customsId" class="b1-medium b1-opacity-80">{{declaration.customsId}}</div>
                     <div class="b1-flex b1-justify-center b1-flex-direction h-100 text-right">
-                        <div class="b1-medium declarations-item_status text-center" [class]="declaration.statusCode.toLowerCase()">{{declaration.statusCode}}</div>
+                        <div class="b1-medium declarations-item_status text-center"
+                            [class]="declaration.statusCode.toLowerCase()">{{declaration.statusCode}}</div>
                     </div>
                 </div>
             </div>
@@ -97,9 +100,8 @@
     </div>
     <div class="b1-flex b1-justify-flex-end b1-align-center">
         Т18 Customs Control for CHAMP TGC
-        <img src="../../assets/images/logo.png" class="b1-ml-4">
     </div>
-    
+
 </div>
 <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="white" type="square-jelly-box" [fullScreen]="true">
     <p style="color: white">

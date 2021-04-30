@@ -1,11 +1,17 @@
 <div class="bg-img">
     <div class="login-card">
         <div class="b1-flex b1-align-center b1-justify-center b1-flex-direction" style="height: 100%;">
-            <div class="login-logo">
-                <img src="../../assets/images/logo.png">
+            <div class="b1-flex">
+                <div class="login-logo">
+                    <img src="../../assets/images/logo-t18.png">
+                </div>
+                <div class="login-logo b1-ml-4">
+                    <img src="../../assets/images/logo.png">
+                </div>
             </div>
+
             <div class="login-title">
-                Champ
+                Customs Status Check
             </div>
             <div class="login-subtitle">
                 Making air cargo simpler, faster and better{{loading | async}}
@@ -28,8 +34,9 @@
                 </div>
             </div>
             <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="white" type="square-jelly-box"
-                [fullScreen]="true"><p style="color: white">
-                Loading... </p>
+                [fullScreen]="true">
+                <p style="color: white">
+                    Loading... </p>
             </ngx-spinner>
         </div>
 
