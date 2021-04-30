@@ -1,0 +1,150 @@
+<div class="declaration" *ngIf="declaration">
+    <div class="declaration-header">
+        <div class="b1-title3">Declaration</div>
+        <div class="b1-medium b1-flex">
+            <div class="b1-primary">
+                MAWB
+            </div>
+            <div class="b1-ml-2 b1-mr-2">
+                -
+            </div>
+            {{header.documentReference}}
+        </div>
+        <div class="b1-medium b1-flex">
+            <div class="b1-primary">
+                MRN
+            </div>
+            <div class="b1-ml-2 b1-mr-2">
+                -
+            </div>
+            {{header.customsId}}
+        </div>
+        <div class="b1-medium">
+            {{header.conveyanceReference}}
+        </div>
+        <div class="b1-medium b1-primary b1-flex">
+            {{declaration.entrySummaryDeclaration.goodsItem.length || 0}}
+            <img src="../../assets/images/package.svg" class="b1-ml-3">
+        </div>
+    </div>
+    <div class="item">
+        <div class="item-header">
+            <div class="b1-medium b1-light b1-flex">
+                <div class="b1-flex">
+                    <span>{{currentIndex + 1}}</span>
+                    <span class="b1-ml-2 b1-mr-2">/</span>
+                    {{declaration.entrySummaryDeclaration.goodsItem.length|| 0}}
+                </div>
+                <div class="b1-ml-4 item-name">
+                    {{currentItem.description}}
+                </div>
+            </div>
+            <div class="b1-medium b1-bold color-gray">
+                Weight {{currentItem.grossWeight}}
+            </div>
+        </div>
+        <div class="item-box">
+            <div class="b1-flex b1-justify-between b1-align-center">
+                <div class="b1-medium item-cons_name">
+                    {{currentItem.consignor.name}}
+                </div>
+                <div>
+                    <div class="destination" [class]="header.statusCode.toLowerCase()">
+
+                    </div>
+                    <div class="b1-primary b1-base text-center b1-mt-2">
+                        {{header.statusCode.toLowerCase()}}
+                    </div>
+                </div>
+                
+                <div class="b1-medium item-cons_name text-right">
+                    {{currentItem.consignee.name}}
+                </div>
+            </div>
+            <div class="b1-mt-5 b1-flex b1-justify-between b1-align-center b1-base">
+                <div class="b1-base item-cons_value">
+                    {{currentItem.consignor.address}}
+                </div>
+                <div class="b1-base item-cons_value text-right">
+                    {{currentItem.consignee.address}}
+                </div>
+            </div>
+            <div class="b1-flex b1-justify-between b1-align-center b1-base">
+                <div class="b1-base item-cons_value">
+                    {{currentItem.consignor.country}}, {{currentItem.consignor.city}}
+                </div>
+                <div class="b1-base item-cons_value text-right">
+                    {{currentItem.consignee.country}}, {{currentItem.consignee.city}}
+                </div>
+            </div>
+            <div class="b1-flex b1-justify-between b1-align-center b1-base">
+                <div class="b1-base item-cons_value color-gray">
+                    ZIP - {{currentItem.consignor.zipCode}}
+                </div>
+                <div class="b1-base item-cons_value text-right color-gray">
+                    ZIP - {{currentItem.consignee.zipCode}}
+                </div>
+            </div>
+        </div>
+        <div class="item-box b1-flex b1-justify-between">
+            <div class="item-documents">
+                <div class="item-documents_header row">
+                    <div class="col-md-8">
+                        <div class="b1-base color-gray">Doc.reference</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="b1-base color-gray">Docktype</div>
+                    </div>
+                </div>
+                <div class="item-documents_document row" *ngFor="let document of currentItem.producedDocument">
+                    <div class="col-md-8">
+                        <div class="b1-base">{{document.documentReference}}</div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="b1-base">{{document.documentType}}</div>
+                    </div>
+                </div>
+            </div>
+            <div class="item-vhr">
+
+            </div>
+            <div class="item-packages">
+                <div class="item-packages_header row">
+                    <div class="col-md-4">
+                        <div class="b1-base color-gray">Kind of package</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="b1-base color-gray">Count</div>
+                    </div>
+                    <div class="col-md-5 text-right">
+                        <div class="b1-base color-gray">Marks</div>
+                    </div>
+                </div>
+                <div class="item-packages_package row" *ngFor="let package of currentItem.package">
+                    <div class="col-md-4">
+                        <div class="b1-base">{{package.kindOfPackage}}</div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="b1-base">{{package.numberOfPackages}}</div>
+                    </div>
+                    <div class="col-md-5 text-right">
+                        <div class="b1-base">{{package.marks}}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="declaration-buttons">
+        <div class="declaration-buttons_button previous" (click)="previous()" [class.disabled]="currentIndex == 0">
+            <img src="../../assets/images/chevron-left.svg">
+            <span class="b1-ml-3">
+                previous
+            </span>
+             
+        </div>
+        <div class="declaration-buttons_button next" (click)="next()" [class.disabled]="currentIndex == declaration.entrySummaryDeclaration.goodsItem.length - 1">
+            <span class="b1-mr-3">next</span>
+            <img src="../../assets/images/chevron-right.svg">
+        </div>
+    </div>
+</div>

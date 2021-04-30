@@ -1,0 +1,201 @@
+$base-unit: 16;
+
+$font-micro-size: 12px;
+$font-micro-line-height: 1;
+$font-small-size: 14px;
+$font-small-line-height: 1.25;
+$font-base-size: 16px;
+$font-base-line-height: 1.5;
+$font-medium-size: 18px;
+$font-medium-line-height: 1.5;
+$font-large-size: 24px;
+$font-large-line-height: 1.5;
+$font-title3-size: 28px;
+$font-title3-line-height: 1.5;
+$font-title2-size: 32px;
+$font-title2-line-height: 1.25;
+$font-title1-size: 48px;
+$font-title1-line-height: 1.25;
+$font-display-size: 64px;
+$font-display-line-height: 1;
+
+@mixin display {
+  font-size: $font-display-size;
+  font-family: "Neue Machina", sans-serif;
+  line-height: $font-display-line-height;
+  font-weight: 600;
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    font-size: $font-title1-size;
+    line-height: $font-title1-line-height;
+  }
+
+  @media (max-width: 767px) {
+    font-size: $font-title2-size;
+    line-height: $font-title2-line-height;
+  }
+}
+
+@mixin title1 {
+  font-size: $font-title1-size;
+  font-family: "Neue Machina", sans-serif;
+  line-height: $font-title1-line-height;
+  font-weight: 600;
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    font-size: $font-title2-size;
+    line-height: $font-title2-line-height;
+  }
+
+  @media (max-width: 767px) {
+    font-size: $font-title3-size;
+    line-height: $font-title3-line-height;
+  }
+}
+
+@mixin title2 {
+  font-size: $font-title2-size;
+  font-family: "Neue Machina", sans-serif;
+  line-height: $font-title2-line-height;
+  font-weight: 600;
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    font-size: $font-title3-size;
+    line-height: $font-title3-line-height;
+  }
+
+  @media (max-width: 767px) {
+    font-size: $font-large-size;
+    line-height: $font-large-line-height;
+  }
+}
+
+@mixin title3 {
+  font-size: $font-title3-size;
+  font-family: "Neue Machina", sans-serif;
+  line-height: $font-title3-line-height;
+  font-weight: 600;
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    font-size: $font-large-size;
+    line-height: $font-large-line-height;
+  }
+
+  @media (max-width: 767px) {
+    font-size: $font-large-size;
+    line-height: $font-large-line-height;
+  }
+}
+
+@mixin large {
+  font-size: $font-large-size;
+  font-family: "Lato", sans-serif;
+  line-height: $font-large-line-height;
+  font-weight: 600;
+
+  @media (min-width: 768px) and (max-width: 991px) {
+    font-size: $font-medium-size;
+    line-height: $font-medium-line-height;
+  }
+
+  @media (max-width: 767px) {
+    font-size: $font-medium-size;
+    line-height: $font-medium-line-height;
+  }
+}
+
+@mixin medium {
+  font-size: $font-medium-size;
+  font-family: "Lato", sans-serif;
+  font-weight: 600;
+  line-height: $font-medium-line-height;
+}
+
+@mixin base {
+  font-size: $font-base-size;
+  font-family: "Lato", sans-serif;
+  line-height: $font-base-line-height;
+}
+
+@mixin small {
+  font-size: $font-small-size;
+  font-family: "Lato", sans-serif;
+  line-height: $font-small-line-height;
+}
+
+@mixin micro {
+  font-size: $font-micro-size;
+  font-family: "Lato", sans-serif;
+  line-height: $font-micro-line-height;
+  text-transform: uppercase;
+}
+
+@mixin bold {
+  font-weight: 600 !important;
+}
+$font-family: "Lato", sans-serif;
+
+@mixin light {
+  font-weight: 300;
+}
+
+.b1 {
+  &-display {
+    @include display;
+  }
+
+  &-title1 {
+    @include title1;
+  }
+
+  &-title2 {
+    @include title2;
+  }
+
+  &-title3 {
+    @include title3;
+  }
+
+  &-large {
+    @include large;
+  }
+
+  &-medium {
+    @include medium;
+  }
+
+  &-base {
+    @include base;
+  }
+
+  &-small {
+    @include small;
+  }
+  &-bold{
+    @include bold;
+  }
+  &-micro {
+    @include micro;
+  }
+
+  &-bold {
+    @include bold;
+  }
+
+  &-light {
+    @include light;
+  }
+}
+
+b {
+  @include bold;
+}
+
+.b1-opacity {
+  &-80 {
+    opacity: 0.8;
+  }
+  &-60 {
+    opacity: 0.6;
+  }
+}

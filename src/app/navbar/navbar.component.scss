@@ -1,0 +1,12 @@
+.b1-navbar {
+    position: fixed;
+    width: 140px;
+    height: 100vh;
+    background: #201f1f;
+    &-logo{
+        margin-top: 48px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
