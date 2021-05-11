@@ -19,6 +19,11 @@ $font-title1-line-height: 1.25;
 $font-display-size: 64px;
 $font-display-line-height: 1;
 
+$color-error: #ba366f;
+$color-success: #36ba5e;
+$color-warning: #e2df3d;
+$color-primary: #7a36ba;
+
 @mixin display {
   font-size: $font-display-size;
   font-family: "Lato", sans-serif;

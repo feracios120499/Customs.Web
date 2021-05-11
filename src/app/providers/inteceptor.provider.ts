@@ -16,7 +16,7 @@ import { TokenResponse } from '../models/TokenResponse';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  endpoint: string = 'https://uacustoms.unity-bars.com/api/v1/';
+  endpoint: string = 'https://uacustoms.t18.me/api/v1/';
   tokenEndpoint: string = '/Bars.API.Admin.Site/';
   host: string = '';
 

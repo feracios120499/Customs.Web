@@ -3,134 +3,243 @@
 @import "assets/scss/spacing";
 @import "~bootstrap/scss/bootstrap";
 html {
-    box-sizing: border-box;
-    font-size: 16px;
+  box-sizing: border-box;
+  font-size: 16px;
 }
 
 body {
-    font-family: $font-family !important;
-    margin: 0px !important;
-    padding: 0px !important;
-    background-color: #f6f6f8 !important;
+  font-family: $font-family !important;
+  margin: 0px !important;
+  padding: 0px !important;
+  background-color: #f6f6f8 !important;
 }
 
 .wrapper {
-    padding: 59px;
+  padding: 59px;
 }
 
 .h-100 {
-    height: 100%;
+  height: 100%;
 }
 
 .b1-dropdown {
-    .dropdown-menu {
-        background: #ffffff !important;
-        padding: 0 !important;
-        border-radius: 10px !important;
-        width: 248px;
-        border: none;
-        box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.14);
+  .dropdown-menu {
+    background: #ffffff !important;
+    padding: 0 !important;
+    border-radius: 10px !important;
+    width: 248px;
+    border: none;
+    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.14);
+  }
+  .dropdown-item {
+    height: 42px;
+    &:first-child {
+      border-radius: 10px 10px 0px 0px !important;
     }
-    .dropdown-item {
-        height: 42px;
-        &:first-child {
-            border-radius: 10px 10px 0px 0px !important;
-        }
-        &:last-child {
-            border-radius: 0px 0px 10px 10px !important;
-        }
-        &:hover {
-            background: rgba(186, 54, 111, 0.1);
-            color: #ba366f;
-            @include base;
-            @include bold;
-        }
-        &.active {
-            background-color: #ba366f;
-            color: white;
-        }
+    &:last-child {
+      border-radius: 0px 0px 10px 10px !important;
     }
+    &:hover {
+      background: rgba(186, 54, 111, 0.1);
+      color: #ba366f;
+      @include base;
+      @include bold;
+    }
+    &.active {
+      background-color: #ba366f;
+      color: white;
+    }
+  }
 }
 .pointer {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .b1-a {
-    color: inherit;
+  color: inherit;
+  text-decoration: none;
+  &:hover {
     text-decoration: none;
-    &:hover {
-        text-decoration: none;
-        color: inherit;
-    }
+    color: inherit;
+  }
 }
 .md-drppicker.shown.double {
-    width: 650px !important;
-    right: 10px !important;
-    left: auto !important;
+  width: 650px !important;
+  right: 10px !important;
+  left: auto !important;
 }
 
 .md-drppicker {
-    padding: 0 !important;
+  padding: 0 !important;
+  border-radius: 10px !important;
+  background: #ffffff !important;
+  border: none !important;
+  box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.14) !important;
+  & .ranges {
+    & ul {
+      & li {
+        &:first-child {
+          border-radius: 10px 10px 0px 0px !important;
+        }
+        &:last-child {
+          border-radius: 0px 0px 10px 10px !important;
+        }
+      }
+    }
+    & button {
+      height: 42px !important;
+      @include base;
+      @include bold;
+
+      &:hover {
+        background: rgba(186, 54, 111, 0.1) !important;
+        color: #ba366f !important;
+      }
+      &.active {
+        background-color: #ba366f !important;
+        color: white !important;
+      }
+    }
+  }
+  & button.btn {
+    width: 150px !important;
+    height: 42px !important;
+
+    background: #ba366f !important;
     border-radius: 10px !important;
-    background: #ffffff !important;
+    outline: none !important;
     border: none !important;
-    box-shadow: 0px 4px 14px rgba(0, 0, 0, 0.14) !important;
-    & .ranges {
-        & ul {
-            & li {
-                &:first-child {
-                    border-radius: 10px 10px 0px 0px !important;
-                }
-                &:last-child {
-                    border-radius: 0px 0px 10px 10px !important;
-                }
-            }
-        }
-        & button {
-            height: 42px !important;
-            @include base;
-            @include bold;
-
-            &:hover {
-                background: rgba(186, 54, 111, 0.1) !important;
-                color: #ba366f !important;
-            }
-            &.active {
-                background-color: #ba366f !important;
-                color: white !important;
-            }
-        }
-    }
-    & button.btn {
-        width: 150px !important;
-        height: 42px !important;
-
-        background: #ba366f !important;
-        border-radius: 10px !important;
-        outline: none !important;
-        border: none !important;
-        color: #ffffff !important;
-        @include small;
-        text-transform: unset !important;
-        cursor: pointer !important;
-    }
+    color: #ffffff !important;
+    @include small;
+    text-transform: unset !important;
+    cursor: pointer !important;
+  }
 }
 .md-drppicker td.active,
 .md-drppicker td.active:hover {
-    background-color: #ba366f !important;
+  background-color: #ba366f !important;
 }
 /* Importing Bootstrap SCSS file. */
 .declaration {
-    & .modal-dialog {
-        width: 940px !important;
-        max-width: 940px !important;
-        & .modal-content {
-            background: #ffffff !important;
-            border-radius: 10px !important;
-        }
+  & .modal-dialog {
+    width: 940px !important;
+    max-width: 940px !important;
+    & .modal-content {
+      background: #ffffff !important;
+      border-radius: 10px !important;
     }
+  }
 }
 
 .b1-primary {
-    color: #ba366f;
+  color: #ba366f;
+}
+
+@keyframes toastr {
+  from {
+    opacity: 0;
+    transform: perspective(800px) rotate3d(1, 0, 0, -10deg)
+      translate3d(0, 25%, 0);
+  }
+
+  to {
+    opacity: 1;
+    transform: perspective(800px) rotate3d(1, 0, 0, 0) translate3d(0, 0, 0);
+  }
+}
+
+.ngx-toastr {
+  margin-bottom: 8px !important;
+  padding: 16px 56px 16px 16px !important;
+  transition: box-shadow 150ms cubic-bezier(0.61, 1, 0.88, 1);
+  width: 400px !important;
+  background-position: 356px center !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
+  animation-name: toastr;
+  animation-duration: 300ms;
+  animation-fill-mode: both;
+  animation-timing-function: cubic-bezier(0.61, 1, 0.88, 1);
+
+  @media screen and (max-width: 800px) {
+    width: 100% !important;
+    width: calc(100% - 16px) !important;
+    margin: 0 16px 16px 16px !important;
+    padding: 16px !important;
+  }
+
+  .toast-title {
+    @include medium;
+    margin-bottom: 8px;
+
+    @media screen and (max-width: 800px) {
+      text-align: center !important;
+    }
+  }
+
+  .toast-message {
+    @include medium;
+
+    opacity: 0.6;
+
+    @media screen and (max-width: 800px) {
+      text-align: center !important;
+    }
+  }
+}
+
+.toast {
+  &-error {
+    background-color: hsl(0, 100%, 5%);
+    border: 2px solid $color-error;
+    color: $color-error;
+    border-radius: 8px !important;
+    &:hover {
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2) !important;
+    }
+    @supports (backdrop-filter: blur(20px)) {
+      background-color: rgba($color-error, 0.1);
+      backdrop-filter: blur(20px);
+    }
+  }
+  &-success {
+    background-color: hsl(150, 100%, 5%);
+    border: 2px solid $color-success;
+    color: $color-success;
+    border-radius: 8px !important;
+    &:hover {
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2) !important;
+    }
+    @supports (backdrop-filter: blur(20px)) {
+      background-color: rgba($color-success, 0.1);
+      backdrop-filter: blur(20px);
+    }
+  }
+  &-warning {
+    background-color: hsl(62, 90%, 5%);
+    border: 2px solid $color-warning;
+    color: $color-warning;
+
+    border-radius: 8px !important;
+    &:hover {
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2) !important;
+    }
+    @supports (backdrop-filter: blur(20px)) {
+      background-color: rgba($color-warning, 0.1);
+      backdrop-filter: blur(20px);
+    }
+  }
+  &-info {
+    background-color: hsl(212, 100%, 5%);
+    border: 2px solid $color-primary;
+    color: $color-primary;
+
+    border-radius: 8px !important;
+    &:hover {
+      box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.2) !important;
+    }
+    @supports (backdrop-filter: blur(20px)) {
+      background-color: rgba($color-primary, 0.1);
+      backdrop-filter: blur(20px);
+    }
+  }
 }

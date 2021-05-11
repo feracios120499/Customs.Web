@@ -38,7 +38,11 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
     BrowserModule,
     BrowserAnimationsModule,
     TranslateModule.forRoot(),
-    ToastrModule.forRoot(),
+    ToastrModule.forRoot({
+      timeOut: 10000,
+      progressBar: true,
+      easing: 'ease-out',
+    }),
     NgxDaterangepickerMd.forRoot(),
     AppRoutingModule,
     FormsModule,

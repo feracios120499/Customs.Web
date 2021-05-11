@@ -40,6 +40,17 @@
     >
       <div class="chp-plane__inner">
         <img
+          class="chp-plane__logo"
+          [style.visibility]="
+            declaration?.airCompanyCode ? 'visible' : 'hidden'
+          "
+          [src]="
+            '../../assets/images/airlines/' +
+            declaration?.airCompanyCode +
+            '.svg'
+          "
+        />
+        <img
           class="chp-plane__image"
           src="../../assets/images/login-plane.png"
         />
@@ -52,22 +63,21 @@
           [ngClass]="uiMode === 'search' ? 'chp-show' : 'chp-hide'"
         >
           <h2 class="chp-form__subtitle chp-animate chp-delay-0">
-            Customs Status Check
+            T18 Air Cargo
           </h2>
-          <p class="chp-form__text chp-animate chp-delay-50">
-            Easily check your current declaration status and receive flight
-            information.
+          <p class="chp-form__heading chp-animate chp-delay-50">
+            Customs Status Check
           </p>
+
           <div class="chp-form-search">
             <div class="chp-form-input chp-animate chp-delay-100">
               <input
                 class="chp-form-input__control"
                 placeholder="Enter MAWB"
+                (ngModelChange)="onSearchInputChange($event)"
                 [(ngModel)]="search"
                 [specialCharacters]="['-']"
                 [dropSpecialCharacters]="false"
-                [showMaskTyped]="true"
-                placeHolderCharacter="0"
                 mask="000-00000000"
               />
               <i class="chp-form-input__icon">
@@ -75,12 +85,13 @@
               </i>
             </div>
             <button
-              class="chp-form-button chp-animate chp-delay-150"
+              class="chp-form-button chp-animate b1-my-3 chp-delay-150"
               [ngClass]="
                 isSearching || searchFinished
                   ? 'chp-form-button_ghost'
                   : 'chp-form-button_primary'
               "
+              [disabled]="isClearing || !isValidSearch"
               (click)="
                 isSearching || searchFinished ? clearSearch() : searchFlight()
               "
@@ -89,10 +100,10 @@
             </button>
           </div>
           <button
-            class="chp-form-button chp-form-button_ghost chp-animate chp-delay-200"
+            class="chp-form-button chp-form-button_ghost b1-mt-6 chp-animate chp-delay-200"
             (click)="setUIMode('login')"
           >
-            Back to login
+            Sign In
           </button>
         </div>
         <div
@@ -102,13 +113,14 @@
           <p
             class="chp-flight-data__not-found chp-animate chp-delay-50"
             [style.visibility]="declaration ? 'hidden' : 'visible'"
-            [style.maxHeight]="declaration ? '0' : 'auto'"
+            [style.maxHeight]="declaration ? '0' : 'none'"
           >
-            We didn't find your declaration
+            We didn't find any declarations
           </p>
           <div
             [style.visibility]="!declaration ? 'hidden' : 'visible'"
-            [style.maxHeight]="declaration ? '0' : 'auto'"
+            [style.maxHeight]="!declaration ? '0' : 'none'"
+            [style.width]="'100%'"
           >
             <p class="chp-flight-data__mrn chp-animate chp-delay-50">
               {{ declaration?.customsId }}
@@ -159,19 +171,23 @@
             </i>
           </div>
           <button
-            class="chp-form-button chp-form-button_primary chp-animate chp-delay-150"
+            class="chp-form-button chp-form-button_primary b1-my-3 chp-animate chp-delay-150"
             (click)="logIn()"
           >
             Sign In
           </button>
           <button
-            class="chp-form-button chp-form-button_ghost chp-animate chp-delay-200"
+            class="chp-form-button chp-form-button_ghost b1-mt-6 chp-animate chp-delay-200"
             (click)="setUIMode('search')"
           >
             Check Customs Status
           </button>
         </div>
       </div>
+    </div>
+    <div class="chp-footer">
+      <img src="../../assets/images/t18-logo.png" />
+      <img src="../../assets/images/champ-logo.png" />
     </div>
   </div>
 

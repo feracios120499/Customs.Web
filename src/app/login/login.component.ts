@@ -23,9 +23,11 @@ export class LoginComponent implements OnInit {
     private declarationService: DeclarationsService
   ) {}
 
-  public uiMode: string = 'login';
+  public uiMode: string = 'search';
   public isSearching: boolean = false;
   public searchFinished: boolean = false;
+  public isClearing: boolean = false;
+  public isValidSearch: boolean = false;
 
   public options: AnimationOptions = {
     path: '/assets/lottie/globe.json',
@@ -74,6 +76,7 @@ export class LoginComponent implements OnInit {
       (error) => {
         this.searchFinished = true;
         this.isSearching = false;
+        this.toastr.error(error.error.Message || error, 'Error');
       },
       () => {
         this.searchFinished = true;
@@ -82,10 +85,28 @@ export class LoginComponent implements OnInit {
     );
   }
 
+  public onSearchInputChange(event) {
+    if (event.length === 12) {
+      this.isValidSearch = true;
+    } else {
+      this.isValidSearch = false;
+    }
+    if (this.searchFinished) {
+      this.isClearing = true;
+      this.searchFinished = false;
+      setTimeout(() => {
+        this.isClearing = false;
+        this.declaration = null;
+      }, 1500);
+    }
+  }
+
   public clearSearch() {
     this.search = '';
     this.searchFinished = false;
+    this.isClearing = true;
     setTimeout(() => {
+      this.isClearing = false;
       this.declaration = null;
     }, 1500);
   }
