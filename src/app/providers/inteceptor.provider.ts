@@ -1,24 +1,18 @@
-import {
-  HttpRequest,
-  HttpHandler,
-  HttpInterceptor,
-  HttpEvent,
-  HttpResponse,
-  HttpErrorResponse,
-} from '@angular/common/http';
+import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError, Subject, interval } from 'rxjs';
-import { tap, throttleTime, throttle, map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { AuthService } from '../services/auth.service';
+import { Observable, throwError } from 'rxjs';
+import { map, tap } from 'rxjs/operators';
+
 import { TokenResponse } from '../models/TokenResponse';
+import { AuthService } from '../services/auth.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  endpoint: string = 'https://uacustoms.t18.me/api/v1/';
-  tokenEndpoint: string = '/Bars.API.Admin.Site/';
-  host: string = '';
+  endpoint = 'https://uacustoms.t18.me/api/v1/';
+  tokenEndpoint = '/Bars.API.Admin.Site/';
+  host = '';
 
   constructor(
     private router: Router,
@@ -60,12 +54,12 @@ export class AuthInterceptor implements HttpInterceptor {
 
   formatRequest(request: HttpRequest<any>): HttpRequest<any> {
     // let end_point = this.demoService.isDemo ? `assents/demo/${this.getCurrentLang()}/`:  this.endpoint;
-    var language =
+    let language =
       this.translate.currentLang == 'ua'
         ? 'uk-UA'
         : this.translate.currentLang == 'ru'
-        ? 'ru-RU'
-        : 'en-US';
+          ? 'ru-RU'
+          : 'en-US';
     if (request.method === 'POST' || request.method === 'PUT') {
       this.shiftDates(request.body);
     }
@@ -176,8 +170,8 @@ export class AuthInterceptor implements HttpInterceptor {
     if (!dateObject || !dateObject._isAMomentObject) {
       return dateObject;
     }
-    var date = dateObject.format('YYYY-MM-DD');
-    var time = dateObject.format('HH:mm:ss');
+    let date = dateObject.format('YYYY-MM-DD');
+    let time = dateObject.format('HH:mm:ss');
     return `${date}T${time}`;
   }
 }

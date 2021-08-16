@@ -6,7 +6,7 @@
         border-radius: 10px;
         transition: all 150ms ease-in-out;
         cursor: pointer;
-        &:hover{
+        &:hover {
             background-color: rgba(186, 54, 111, 0.1);
         }
         &_status {
@@ -136,7 +136,26 @@
     justify-content: center;
     color: #ba366f;
     cursor: pointer;
-    &:hover{
+    &:hover {
         background-color: rgba(186, 54, 111, 0.1);
+    }
+}
+
+.download {
+    width: 120px;
+    height: 42px;
+
+    border: 1px solid #ba366f;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ba366f;
+    cursor: pointer;
+    &:hover {
+        background-color: rgba(186, 54, 111, 0.1);
+    }
+    & img {
+        width: 16px;
     }
 }

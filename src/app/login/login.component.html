@@ -1,67 +1,39 @@
 <div class="chp-wrapper">
-  <img
-    class="chp-background-image"
-    [ngClass]="uiMode === 'login' ? 'chp-top' : 'chp-bottom'"
-    src="../../assets/images/login-background.jpg"
-  />
+  <img class="chp-background-image" [ngClass]="uiMode === 'login' ? 'chp-top' : 'chp-bottom'"
+    src="../../assets/images/login-background.jpg" />
   <div class="chp-content">
-    <div
-      class="chp-globe"
-      [ngClass]="
+    <div class="chp-globe" [ngClass]="
         (uiMode === 'login' ? 'chp-to-left' : 'chp-to-right') +
         ' ' +
         (isSearching || searchFinished ? 'chp-hide' : 'chp-show')
-      "
-    >
+      ">
       <div class="chp-globe__inner">
-        <img
-          class="chp-globe__image"
-          src="../../assets/images/login-globe.png"
-        />
-        <ng-lottie
-          (animationCreated)="animationCreated($event)"
-          width="1200px"
-          height="1200px"
-          containerClass="chp-globe__animation"
-          [options]="options"
-          [styles]="{
+        <img class="chp-globe__image" src="../../assets/images/login-globe.png" />
+        <ng-lottie (animationCreated)="animationCreated($event)" width="1200px" height="1200px"
+          containerClass="chp-globe__animation" [options]="options" [styles]="{
             position: 'absolute',
             top: '0',
             bottom: '0',
             left: '0',
             right: '0'
-          }"
-        ></ng-lottie>
+          }"></ng-lottie>
       </div>
     </div>
-    <div
-      class="chp-plane"
-      [ngClass]="!isSearching && !searchFinished ? 'chp-hidden' : 'chp-fly-out'"
-    >
+    <div class="chp-plane" [ngClass]="!isSearching && !searchFinished ? 'chp-hidden' : 'chp-fly-out'">
       <div class="chp-plane__inner">
-        <img
-          class="chp-plane__logo"
-          [style.visibility]="
+        <img class="chp-plane__logo" [style.visibility]="
             declaration?.airCompanyCode ? 'visible' : 'hidden'
-          "
-          [src]="
+          " [src]="
             '../../assets/images/airlines/' +
             declaration?.airCompanyCode +
             '.svg'
-          "
-        />
-        <img
-          class="chp-plane__image"
-          src="../../assets/images/login-plane.png"
-        />
+          " />
+        <img class="chp-plane__image" src="../../assets/images/login-plane.png" />
       </div>
     </div>
     <div class="chp-layout">
       <div class="chp-contents">
-        <div
-          class="chp-form"
-          [ngClass]="uiMode === 'search' ? 'chp-show' : 'chp-hide'"
-        >
+        <div class="chp-form" [ngClass]="uiMode === 'search' ? 'chp-show' : 'chp-hide'">
           <h2 class="chp-form__subtitle chp-animate chp-delay-0">
             T18 Air Cargo
           </h2>
@@ -71,133 +43,101 @@
 
           <div class="chp-form-search">
             <div class="chp-form-input chp-animate chp-delay-100">
-              <input
-                class="chp-form-input__control"
-                placeholder="Enter MAWB"
-                (ngModelChange)="onSearchInputChange($event)"
-                [(ngModel)]="search"
-                [specialCharacters]="['-']"
-                [dropSpecialCharacters]="false"
-                mask="000-00000000"
-              />
+              <input class="chp-form-input__control" placeholder="Enter MAWB"
+                (ngModelChange)="onSearchInputChange($event)" [(ngModel)]="search" [specialCharacters]="['-']"
+                [dropSpecialCharacters]="false" mask="000-00000000" />
               <i class="chp-form-input__icon">
                 <img src="../../assets/icons/ic-search.svg" />
               </i>
             </div>
-            <button
-              class="chp-form-button chp-animate b1-my-3 chp-delay-150"
-              [ngClass]="
+            <button class="chp-form-button chp-animate b1-my-3 chp-delay-150" [ngClass]="
                 isSearching || searchFinished
                   ? 'chp-form-button_ghost'
                   : 'chp-form-button_primary'
-              "
-              [disabled]="isClearing || !isValidSearch"
-              (click)="
+              " [disabled]="isClearing || !isValidSearch" (click)="
                 isSearching || searchFinished ? clearSearch() : searchFlight()
-              "
-            >
+              ">
               {{ isSearching || searchFinished ? "Clear" : "Search" }}
             </button>
           </div>
-          <button
-            class="chp-form-button chp-form-button_ghost b1-mt-6 chp-animate chp-delay-200"
-            (click)="setUIMode('login')"
-          >
+          <button class="chp-form-button chp-form-button_ghost b1-mt-6 chp-animate chp-delay-200"
+            (click)="setUIMode('login')">
             Sign In
           </button>
         </div>
-        <div
-          class="chp-flight-data"
-          [ngClass]="searchFinished ? 'chp-show' : 'chp-hide'"
-        >
-          <p
-            class="chp-flight-data__not-found chp-animate chp-delay-50"
-            [style.visibility]="declaration ? 'hidden' : 'visible'"
-            [style.maxHeight]="declaration ? '0' : 'none'"
-          >
-            We didn't find any declarations
+        <div class="chp-flight-data" *ngIf="!declaration && searchFinished">
+          <p class="chp-flight-data__not-found chp-animate chp-delay-50"
+            [style.visibility]="declaration ? 'hidden' : 'visible'" [style.maxHeight]="declaration ? '0' : 'none'">
+            We didn't find any declarationss
           </p>
-          <div
-            [style.visibility]="!declaration ? 'hidden' : 'visible'"
-            [style.maxHeight]="!declaration ? '0' : 'none'"
-            [style.width]="'100%'"
-          >
-            <p class="chp-flight-data__mrn chp-animate chp-delay-50">
-              {{ declaration?.customsId }}
-            </p>
-            <p class="chp-flight-data__flight chp-animate chp-delay-100">
-              <span class="chp-flight-data__flight-number">{{
-                declaration?.conveyanceReference
-              }}</span>
-              <span> / </span>
-              <span class="chp-flight-data__flight-date">{{
-                declaration?.declarationDate | date: "ddMMM" | uppercase
-              }}</span>
-            </p>
-            <p class="chp-flight-data__status chp-animate chp-delay-150">
-              <span class="chp-flight-data__status-text">{{
-                declaration?.statusCode
-              }}</span
-              ><span class="chp-flight-data__status-line"></span>
-            </p>
-          </div>
         </div>
+        <ng-scrollbar class="virtual-scroll b1-page-data">
+          <div class="chp-flight-data" [ngClass]="searchFinished ? 'chp-show' : 'chp-hide'"
+            *ngFor="let declaration of declarations">
+
+            <div [style.visibility]="!declarations ? 'hidden' : 'visible'"
+              [style.maxHeight]="!declarations ? '0' : 'none'" [style.width]="'100%'">
+              <div class="chp-flight-data__mrn chp-animate chp-delay-50">
+                {{ declaration?.customsId }}
+                <div class="chp-flight-data__flight">
+                  <span class="chp-flight-data__flight-number">{{ declaration?.conveyanceReference }}</span>
+                  <span> / </span>
+                  <span class="chp-flight-data__flight-date">
+                    {{ declaration?.declarationDate | date: "ddMMM" | uppercase }}
+                  </span>
+                </div>
+              </div>
+              <p class="chp-flight-data__status chp-animate chp-delay-150">
+                <span class="chp-flight-data__status-text">{{
+                  declaration?.statusCode
+                  }}</span><span class="chp-flight-data__status-line"></span>
+              </p>
+
+            </div>
+          </div>
+        </ng-scrollbar>
+
       </div>
-      <div class="chp-contents">
-        <div
-          class="chp-form"
-          [ngClass]="uiMode === 'login' ? 'chp-show' : 'chp-hide'"
-        >
+      <div class="chp-contents" *ngIf="uiMode === 'login'">
+        <div class="chp-form" [ngClass]="uiMode === 'login' ? 'chp-show' : 'chp-hide'">
           <h1 class="chp-form__title chp-animate chp-delay-0">T18 Air Cargo</h1>
           <div class="chp-form-input chp-animate chp-delay-50">
-            <input
-              class="chp-form-input__control"
-              placeholder="Username"
-              [(ngModel)]="email"
-            />
+            <input class="chp-form-input__control" placeholder="Username" [(ngModel)]="email" />
             <i class="chp-form-input__icon">
               <img src="../../assets/icons/ic-profile.svg" />
             </i>
           </div>
           <div class="chp-form-input chp-animate chp-delay-100">
-            <input
-              class="chp-form-input__control"
-              placeholder="Password"
-              type="password"
-              [(ngModel)]="password"
-            />
+            <input class="chp-form-input__control" placeholder="Password" type="password" [(ngModel)]="password" />
             <i class="chp-form-input__icon">
               <img src="../../assets/icons/ic-lock.svg" />
             </i>
           </div>
-          <button
-            class="chp-form-button chp-form-button_primary b1-my-3 chp-animate chp-delay-150"
-            (click)="logIn()"
-          >
+          <button class="chp-form-button chp-form-button_primary b1-my-3 chp-animate chp-delay-150" (click)="logIn()">
             Sign In
           </button>
-          <button
-            class="chp-form-button chp-form-button_ghost b1-mt-6 chp-animate chp-delay-200"
-            (click)="setUIMode('search')"
-          >
+          <button class="chp-form-button chp-form-button_ghost b1-mt-6 chp-animate chp-delay-200"
+            (click)="setUIMode('search')">
             Check Customs Status
           </button>
         </div>
       </div>
     </div>
     <div class="chp-footer">
-      <img src="../../assets/images/t18-logo.png" />
-      <img src="../../assets/images/champ-logo.png" />
+      <div class="chp-footer-img">
+        <a href="https://t18.me/" target="_blank">
+          <img src="../../assets/images/t18-logo.png" />
+        </a>
+        <img src="../../assets/images/champ-logo.png" />
+      </div>
+      <div class="b1-medium chp-footer-copyright">
+        All Right Reserved. Copyright © T18 2021
+      </div>
+
     </div>
   </div>
 
-  <ngx-spinner
-    bdColor="rgba(0, 0, 0, 0.8)"
-    size="medium"
-    color="white"
-    type="square-jelly-box"
-    [fullScreen]="true"
-  >
+  <ngx-spinner bdColor="rgba(0, 0, 0, 0.8)" size="medium" color="white" type="square-jelly-box" [fullScreen]="true">
     <p style="color: white">Loading...</p>
   </ngx-spinner>
 </div>

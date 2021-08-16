@@ -5,6 +5,7 @@ import { AnimationOptions } from 'ngx-lottie';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { Observable } from 'rxjs';
+
 import { DeclarationHeader } from '../models/DeclarationHeaderModel';
 import { AuthService } from '../services/auth.service';
 import { DeclarationsService } from '../services/declarations.service';
@@ -21,13 +22,13 @@ export class LoginComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private toastr: ToastrService,
     private declarationService: DeclarationsService
-  ) {}
+  ) { }
 
-  public uiMode: string = 'search';
-  public isSearching: boolean = false;
-  public searchFinished: boolean = false;
-  public isClearing: boolean = false;
-  public isValidSearch: boolean = false;
+  public uiMode = 'search';
+  public isSearching = false;
+  public searchFinished = false;
+  public isClearing = false;
+  public isValidSearch = false;
 
   public options: AnimationOptions = {
     path: '/assets/lottie/globe.json',
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
   public password: string;
   public search: string;
 
+  public declarations: DeclarationHeader[] = null;
   public declaration: DeclarationHeader = null;
 
   public loading: Observable<boolean>;
@@ -48,6 +50,8 @@ export class LoginComponent implements OnInit {
         this.spinner.hide();
       }
     });
+    // this.search = '566-15050766';
+    // this.searchFlight();
   }
 
   animationCreated(animationItem: AnimationItem): void {
@@ -71,7 +75,10 @@ export class LoginComponent implements OnInit {
     this.declarationService.searchDeclaration(this.search).subscribe(
       (response) => {
         console.log(response);
-        this.declaration = response;
+        this.declarations = response;
+        if (response && response.length !== 0) {
+          this.declaration = response[0];
+        }
       },
       (error) => {
         this.searchFinished = true;
@@ -96,6 +103,7 @@ export class LoginComponent implements OnInit {
       this.searchFinished = false;
       setTimeout(() => {
         this.isClearing = false;
+        this.declarations = null;
         this.declaration = null;
       }, 1500);
     }
@@ -107,12 +115,13 @@ export class LoginComponent implements OnInit {
     this.isClearing = true;
     setTimeout(() => {
       this.isClearing = false;
+      this.declarations = null;
       this.declaration = null;
     }, 1500);
   }
 
   public setUIMode(mode: string) {
-    if (mode === 'login') this.clearSearch();
+    if (mode === 'login') { this.clearSearch(); }
     this.uiMode = mode;
   }
 }

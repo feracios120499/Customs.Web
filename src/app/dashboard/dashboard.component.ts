@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { saveAs } from 'file-saver';
 import * as moment from 'moment';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { Observable } from 'rxjs';
+
+import { DeclarationComponent } from '../declaration/declaration.component';
 import { DeclarationHeader } from '../models/DeclarationHeaderModel';
-import { DeclarationViewModel } from '../models/DeclarationViewModel';
 import { ProfileModel } from '../models/ProfileModel';
 import { AuthService } from '../services/auth.service';
 import { DeclarationsService } from '../services/declarations.service';
 import { OdataService } from '../services/odata.service';
-import { NgbModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
-import { DeclarationComponent } from '../declaration/declaration.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -59,7 +60,7 @@ export class DashboardComponent implements OnInit {
       translate: 'Flight number',
       direct: 'desc'
     }
-  ]
+  ];
   currentSort = this.sortList[0];
   ngOnInit(): void {
     this.declarationService.loading$.subscribe((loading) => {
@@ -71,11 +72,11 @@ export class DashboardComponent implements OnInit {
       }
     });
     this.currentUser = this.authService.currentUser;
-    //this.loadList();
+    // this.loadList();
   }
-  openDetail(header:DeclarationHeader) {
+  openDetail(header: DeclarationHeader) {
     this.declarationService.getDeclaration(header.id).subscribe((response) => {
-      let modalRef = this.modal.open(DeclarationComponent,{ windowClass: 'declaration' });
+      const modalRef = this.modal.open(DeclarationComponent, { windowClass: 'declaration' });
       modalRef.componentInstance.declaration = response.declarationModel;
       modalRef.componentInstance.header = header;
       modalRef.result.then((response) => {
@@ -83,8 +84,8 @@ export class DashboardComponent implements OnInit {
       },
         (reason) => {
           console.log(reason);
-        })
-    })
+        });
+    });
 
   }
   setSort(sort) {
@@ -101,10 +102,15 @@ export class DashboardComponent implements OnInit {
     filter += '&$orderby=' + this.currentSort.name + ' ' + this.currentSort.direct;
     this.declarationService.getDeclarations(filter).subscribe((response) => {
       this.declarationList = response;
-    })
+    });
   }
   logOut() {
     this.authService.logOut();
+  }
+
+  export(): void {
+    this.declarationService.exportDeclarations(this.selected.startDate._d, this.selected.endDate._d)
+      .subscribe(result => saveAs(result.Blob, result.FileName));
   }
 
 

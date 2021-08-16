@@ -1,29 +1,23 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { ScrollingModule } from '@angular/cdk/scrolling';
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { LocaleService, NgxDaterangepickerMd } from 'ngx-daterangepicker-material';
+import { LottieModule } from 'ngx-lottie';
+import { IConfig, NgxMaskModule } from 'ngx-mask';
+import { NgScrollbarModule } from 'ngx-scrollbar';
+import { NgxSpinnerModule } from 'ngx-spinner';
+import { ToastrModule } from 'ngx-toastr';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import {
-  HttpClient,
-  HttpClientModule,
-  HTTP_INTERCEPTORS,
-} from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthInterceptor } from './providers/inteceptor.provider';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CabinetComponent } from './cabinet/cabinet.component';
-import { NgxSpinnerModule } from 'ngx-spinner';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { ToastrModule } from 'ngx-toastr';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {
-  LocaleService,
-  NgxDaterangepickerMd,
-} from 'ngx-daterangepicker-material';
-import { LottieModule } from 'ngx-lottie';
-import { IConfig, NgxMaskModule } from 'ngx-mask';
 
 export function playerFactory() {
   return import(
@@ -55,6 +49,8 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
       useCache: true,
     }),
     NgxMaskModule.forRoot(),
+    ScrollingModule,
+    NgScrollbarModule
   ],
   providers: [
     {
@@ -66,7 +62,7 @@ export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');

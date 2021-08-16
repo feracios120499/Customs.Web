@@ -1,10 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { catchError, finalize } from 'rxjs/operators';
+import { catchError, finalize, map } from 'rxjs/operators';
+
 import { DeclarationHeader } from '../models/DeclarationHeaderModel';
-import { Declaration } from '../models/DeclarationModel';
 import { DeclarationViewModel } from '../models/DeclarationViewModel';
+import { ExportFile } from '../models/ExportFileModel';
 import { BaseService } from './base.service';
 
 @Injectable({
@@ -20,7 +21,7 @@ export class DeclarationsService extends BaseService {
 
   getDeclarations(filter: string = null): Observable<Array<DeclarationHeader>> {
     let prefix = '';
-    if (filter) prefix = '?';
+    if (filter) { prefix = '?'; }
     this.triggerLoading(true);
 
     return this.http
@@ -39,10 +40,37 @@ export class DeclarationsService extends BaseService {
     );
   }
 
-  searchDeclaration(mawb: string): Observable<DeclarationHeader> {
-    return this.http.get<DeclarationHeader>(`declaration/mawb/${mawb}`).pipe(
+  searchDeclaration(mawb: string): Observable<Array<DeclarationHeader>> {
+    return this.http.get<Array<DeclarationHeader>>(`declaration/mawb/${mawb}`).pipe(
       catchError(this.handleError),
-      finalize(() => {})
+      finalize(() => { })
     );
+  }
+
+  exportDeclarations(dateStart: Date, dateEnd: Date): Observable<ExportFile> {
+    this.triggerLoading(true);
+    return this.http.get(`declaration/export?dateStart=${this.formatDate(dateStart)}&dateEnd=${this.formatDate(dateEnd)}`, { responseType: 'blob', observe: 'response' }).pipe(
+      map(res => {
+        const model = new ExportFile();
+        model.Blob = res.body;
+        model.FileName = this.getFileNameFromHttpResponse(res);
+        return model;
+      }),
+      catchError(this.handleError),
+      finalize(() => this.triggerLoading(false)));
+  }
+
+  private formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const d = date.getDate();
+    const m = date.getMonth() + 1; // Month from 0 to 11
+    const y = date.getFullYear();
+    return '' + y + '-' + (m <= 9 ? '0' + m : m) + '-' + (d <= 9 ? '0' + d : d);
+  }
+
+  private getFileNameFromHttpResponse(httpResponse) {
+    const contentDispositionHeader = httpResponse.headers.get('Content-Disposition');
+    const result = contentDispositionHeader.split(';')[1].trim().split('=')[1];
+    return result.replace(/"/g, '');
   }
 }

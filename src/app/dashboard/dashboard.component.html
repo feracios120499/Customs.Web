@@ -47,7 +47,12 @@
                     (datesUpdated)="datesUpdated($event)" [showCustomRangeLabel]="true"
                     [locale]="{applyLabel: 'Apply', format: 'DD MMM,YYYY'}" readonly />
             </div>
-
+            <div class="b1-ml-2">
+                <div class="download" (click)="export()">
+                    Export
+                    <img src="../../assets/images/down-arrow.svg" alt="" class="b1-ml-3">
+                </div>
+            </div>
         </div>
     </div>
 
